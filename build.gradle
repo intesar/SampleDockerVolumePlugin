@@ -1,0 +1,41 @@
+buildscript {
+	ext {
+		springBootVersion = '1.4.1.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'spring-boot'
+
+jar {
+	baseName = 'SampleDockerVolumeDriver'
+	version = '1.0-SNAPSHOT' + '-' + System.currentTimeMillis();
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+	compile("org.springframework.boot:spring-boot-starter-web")
+	compile("org.springframework.boot:spring-boot-starter-aop")
+	compile('org.springframework.boot:spring-boot-starter')
+    compile('org.springframework:spring-test')
+	compile("org.apache.commons:commons-exec:1.3")
+	compile("commons-collections:commons-collections:3.2.1")
+	compile("commons-codec:commons-codec:1.4")
+	compile("commons-io:commons-io:2.5")
+	compile("org.apache.commons:commons-lang3:3.0")
+	compile("com.fasterxml.jackson.core:jackson-databind")
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
