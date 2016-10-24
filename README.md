@@ -26,6 +26,7 @@ How to clone and write you're own driver implementation
 * Implement this interface com.dchq.docker.volume.driver.adaptor.VolumeAdaptor.java
 * Checkout the sample implementation com.dchq.docker.volume.driver.adaptor.LocalVolumeAdaptorImpl.java
 * Comment @Component in com.dchq.docker.volume.driver.adaptor.LocalVolumeAdaptorImpl.java
+* Checkout application.properties file for more information on enabling wire level logging and cert creation.
 
 
 Issues
