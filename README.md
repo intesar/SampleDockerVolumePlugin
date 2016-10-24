@@ -68,4 +68,12 @@ SuccessExitStatus=143
 WantedBy=multi-user.target
 
 
-*systemctl enable myapp.service
+* systemctl enable myapp.service
+
+
+Sample Docker Volume commands for creating, deleting, listing, inspecting volumes
+==================================================
+* docker volume create --driver dchqvol --name dchqvol116
+* docker volume inspect --driver dchqvol --name dchqvol116
+* docker volume ls | grep dchqvol
+* docker volume remove --driver dchqvol --name dchqvol116
