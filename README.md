@@ -39,4 +39,29 @@ Integration Tests  & sample code.
 How to deploy and test
 ======================
 * Copy dchqvol.json file to /etc/docker/plugins/ on the docker host.
-* java -jar
+* Download the executable "wget https://www.dropbox.com/s/ixl0gc7bdfxqtwa/SampleDockerVolumeDriver-1.0-SNAPSHOT-1477279416108.jar?dl=1 -O dchqvol.jar
+* java -jar dchqvol.jar
+
+* Installing as init.d service
+* sudo ln -s /opt/dchq/dchqvol.jar /etc/init.d/dchqvol
+* service dchqvol start
+
+* Installing as systemd service
+* Create this file /etc/systemd/system/dchqvol.service with below content
+
+[Unit]
+Description=dchqvol
+After=syslog.target
+
+[Service]
+User=dchqvol
+ExecStart=/opt/dchq/dchqvol.jar
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target
+
+
+*systemctl enable myapp.service
+
+
