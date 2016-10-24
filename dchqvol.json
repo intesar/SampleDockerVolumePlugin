@@ -1,4 +1,7 @@
 {
   "Name": "dchqvol",
-  "Addr": "http://localhost:8888"
+  "Addr": "http://localhost:4434",
+  "TLSConfig": {
+    "InsecureSkipVerify": true
+  }
 }
