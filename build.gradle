@@ -18,6 +18,13 @@ jar {
     baseName = 'SampleDockerVolumeDriver'
     version = '1.0-SNAPSHOT' + '-' + System.currentTimeMillis();
 }
+
+task latestJar(type: Jar) {
+    baseName = 'SampleDockerVolumeDriver' + '-latest'
+}
+
+jar.dependsOn(latestJar)
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
