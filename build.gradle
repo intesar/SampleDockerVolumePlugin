@@ -25,6 +25,12 @@ task latestJar(type: Jar) {
 
 jar.dependsOn(latestJar)
 
+tasks.withType(Jar) { task ->
+    task.doLast {
+        ant.checksum file: it.archivePath
+    }
+}
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
