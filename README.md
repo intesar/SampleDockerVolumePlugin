@@ -14,8 +14,10 @@ Implements sample local volume driver based on docker plugin architecture.
 
 ### Learn more about HyperGrid [HyperGrid] (http://hypergrid.com/)
 
-1/4. Docker Plugin Spec
-==================================================
+
+
+## 1/4. Understanding Docker Plugin Spec
+
 * Reference
   * https://docs.docker.com/engine/extend/plugin_api/
   * https://docs.docker.com/engine/extend/plugins_volume/
@@ -76,15 +78,15 @@ Implements sample local volume driver based on docker plugin architecture.
   * docker stop 
     * /VolumeDriver.Unmount    
     
-2/4 Endpoint Implementation (Legacy)
-==================================================
-https://github.com/intesar/SampleDockerVolumePlugin/blob/master/src/main/java/com/dchq/docker/volume/driver/controller/DockerVolumeDriverController.java
+## 2/4 Endpoint Implementation 
+  * (Legacy) [Java Controller code] (https://github.com/intesar/SampleDockerVolumePlugin/blob/master/src/main/java/com/dchq/docker/volume/driver/controller/DockerVolumeDriverController.java)
 
-Endpoint Implementation (Unix Sockets)
+### Endpoint Implementation (Unix Sockets)
 ==================================================
-  * https://github.com/jnr/jnr-unixsocket (Java doesn't natively support Unix Sockets)
-  * Sample Unix-Socket based implementation https://github.com/intesar/SampleDockerVolumePluginUnixSocket
-  * https://github.com/intesar/SampleDockerVolumePluginUnixSocket/blob/master/src/main/java/com/dchq/docker/volume/driver/controller/SocketController.java
+  * https://github.com/jnr/jnr-unixsocket (Java doesn't natively support Unix Sockets so we used this framework)
+  * Here is our Sample Unix-Socket based implementation
+    * [Github repository] (https://github.com/intesar/SampleDockerVolumePluginUnixSocket)
+    * [Code] ( https://github.com/intesar/SampleDockerVolumePluginUnixSocket/blob/master/src/main/java/com/dchq/docker/volume/driver/controller/SocketController.java)
 
 How to build this code.
 ==================================================
