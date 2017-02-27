@@ -82,19 +82,125 @@ Implements sample local volume driver based on docker plugin architecture.
   * (Legacy) [Java Controller code] (https://github.com/intesar/SampleDockerVolumePlugin/blob/master/src/main/java/com/dchq/docker/volume/driver/controller/DockerVolumeDriverController.java)
 
 ### Endpoint Implementation (Unix Sockets)
-==================================================
   * https://github.com/jnr/jnr-unixsocket (Java doesn't natively support Unix Sockets so we used this framework)
   * Here is our Sample Unix-Socket based implementation
     * [Github repository] (https://github.com/intesar/SampleDockerVolumePluginUnixSocket)
     * [Code] ( https://github.com/intesar/SampleDockerVolumePluginUnixSocket/blob/master/src/main/java/com/dchq/docker/volume/driver/controller/SocketController.java)
 
-How to build this code.
-==================================================
-* ./gradlew clean ; ./gradlew build
 
-How to run this code.
-==================================================
-* ./gradlew bootrun
+## 3/4 How to build the plugin
+* (Reference Doc) [https://github.com/docker/docker/blob/master/docs/extend/index.md]
+* You need to wrap your plugin code in a container. So you need Dockerfile, here is one sample.
+```
+FROM java:8
+RUN mkdir -p /opt/dchq
+RUN mkdir -p /opt/dchq/log
+RUN mkdir -p /opt/dchq/config
+RUN mkdir -p /opt/dchq/data
+RUN touch /opt/dchq/data/mount.properties
+RUN mkdir -p /run/docker/plugins /var/lib/hypercloud/volumes
+COPY DCHQ-HBS-driver.jar /opt/dchq/DCHQ-HBS-driver.jar
+EXPOSE 4434
+#WORKDIR /opt/hbs/
+#RUN java -jar /opt/dchq/DCHQ-HBS-driver.jar
+ENV JAVA_OPTS=""
+ENV proxy.host="https://10.0.1.12"N"
+ENTRYPOINT ["java", "-jar", "/opt/dchq/DCHQ-HBS-driver.jar"]
+
+```
+* Build the image
+```
+docker build -t rootfsimage .
+```
+* Get id
+```
+id=$(docker create rootfsimage true) # id was cd851ce43a403 when the image was created
+```
+* Create folder structure
+```
+mkdir -p myplugin/rootfs
+```
+* export image contents into rootfs folder
+```
+sudo docker export "$id" | sudo tar -x -C myplugin/rootfs
+```
+* Delete image
+```
+docker rm -vf "$id"
+docker rmi rootfsimage
+```
+* Create a config file. Sample contents
+```
+{
+  "description": "HyperCloud Block Storage Service Plugin",
+  "documentation": "https://dchq.io",
+  "entrypoint": [
+    "java",
+    "-jar",
+    "/opt/dchq/DCHQ-HBS-driver.jar"
+  ],
+  "Env": [
+    {
+      "Description": "",
+      "Name": "proxy.host",
+      "Settable": [
+        "value"
+      ],
+      "Value": "https://10.0.1.12"
+    }
+  ],
+  "interface": {
+    "types": [
+      "docker.volumedriver/1.0"
+    ],
+    "socket": "hypercloud.sock"
+  },
+  "Linux": {
+    "Capabilities": [
+      "CAP_SYS_ADMIN"
+    ],
+    "AllowAllDevices": true,
+    "Devices": null
+  },
+  "mounts": [
+    {
+      "source": "/dev",
+      "destination": "/dev",
+      "type": "bind",
+      "options": [
+        "rbind"
+      ]
+    },
+    {
+      "source": "/usr/bin/",
+      "destination": "/usr/bin/",
+      "type": "bind",
+      "options": [
+        "rbind"
+      ]
+    },
+    {
+      "source": "/opt/dchq/config/",
+      "destination": "/opt/dchq/config/",
+      "type": "bind",
+      "options": [
+        "rbind"
+      ]
+    }
+  ],
+  "Network": {
+    "Type": "host"
+  },
+  "PropagatedMount": "/var/lib/hypercloud/volumes",
+  "User": {},
+  "WorkDir": ""
+}
+```
+
+
+## 4/4 How to install/debug the plugin
+
+* 
 
 How to clone and write you're own driver implementation
 ==================================================
