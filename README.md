@@ -1,3 +1,7 @@
+
+https:/dchq.io (Free SaaS Product)
+http://hypergrid.com/ (Learn more about HyperGrid)
+
 Java based implementation of Docker Volume Plugin/Driver
 ==============================================================
 Implements sample of local volume driver based on legacy and based plugin architecture.
@@ -5,12 +9,12 @@ Implements sample of local volume driver based on legacy and based plugin archit
 
 Technology Stack
 ==================================================
-* Docker version v1.13+ (v1.12+ legacy driver)
+* Docker version v1.13+ (and v1.12+ legacy driver)
 * Java 1.8+
 * OS: Linux
 * Gradle 2.4+
 
-Docke Plugin Spec
+1/4. Docker Plugin Spec
 ==================================================
 * Reference
   * https://docs.docker.com/engine/extend/plugin_api/
@@ -89,7 +93,6 @@ How to build this code.
 How to run this code.
 ==================================================
 * ./gradlew bootrun
-
 
 How to clone and write you're own driver implementation
 ==================================================
