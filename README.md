@@ -139,3 +139,14 @@ Sample Docker Volume commands for creating, deleting, listing, inspecting volume
 * docker volume inspect dchqvol116
 * docker volume ls | grep dchqvol
 * docker volume remove dchqvol116
+
+* curl  -X POST --unix-socket /tmp/hypercloud.sock http://localhost/Plugin.Activate
+* curl  -X POST --unix-socket /tmp/hypercloud.sock http://localhost/VolumeDriver.Capabilities
+
+* curl  -X POST --unix-socket /tmp/hypercloud.sock http://localhost/VolumeDriver.Create -d '{"Name":"vol-100"}'
+* curl  -X POST --unix-socket /tmp/hypercloud.sock http://localhost/VolumeDriver.Mount -d '{"Name":"vol-100", "ID": "id-123"}'
+* curl  -X POST --unix-socket /tmp/hypercloud.sock http://localhost/VolumeDriver.Unmount -d '{"Name":"vol-100", "ID": "id-123"}'
+* curl  -X POST --unix-socket /tmp/hypercloud.sock http://localhost/VolumeDriver.Get -d '{"Name":"vol-100"}'
+* curl  -X POST --unix-socket /tmp/hypercloud.sock http://localhost/VolumeDriver.List
+* curl  -X POST --unix-socket /tmp/hypercloud.sock http://localhost/VolumeDriver.Path -d '{"Name":"vol-100"}'
+* curl  -X POST --unix-socket /tmp/hypercloud.sock http://localhost/VolumeDriver.Remove -d '{"Name":"vol-100"}'
