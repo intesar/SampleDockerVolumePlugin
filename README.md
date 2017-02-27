@@ -76,6 +76,12 @@ Endpoint Implementation (Legacy)
 ==================================================
 https://github.com/intesar/SampleDockerVolumePlugin/blob/master/src/main/java/com/dchq/docker/volume/driver/controller/DockerVolumeDriverController.java
 
+Endpoint Implementation (Unix Sockets)
+==================================================
+  * https://github.com/jnr/jnr-unixsocket (Java doesn't natively support Unix Sockets)
+  * Sample Unix-Socket based implementation https://github.com/intesar/SampleDockerVolumePluginUnixSocket
+  * https://github.com/intesar/SampleDockerVolumePluginUnixSocket/blob/master/src/main/java/com/dchq/docker/volume/driver/controller/SocketController.java
+
 How to build this code.
 ==================================================
 * ./gradlew clean ; ./gradlew build
