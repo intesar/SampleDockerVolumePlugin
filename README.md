@@ -1,8 +1,11 @@
 
-https://dchq.io (Free SaaS Product)
+Free SaaS Product
 ==============================================================
-http://hypergrid.com/ (Learn more about HyperGrid)
+https://dchq.io 
+
+Learn more about HyperGrid
 ==============================================================
+http://hypergrid.com/ 
 
 Java based implementation of Docker Volume Plugin/Driver
 ==============================================================
