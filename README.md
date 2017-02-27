@@ -12,12 +12,18 @@ Technology Stack
 
 Docke Plugin Spec
 ==================================================
-* https://docs.docker.com/engine/extend/plugin_api/
+* Reference
+  * https://docs.docker.com/engine/extend/plugin_api/
+  * https://docs.docker.com/engine/extend/plugins_volume/
 
 * /Plugin.Activate
-  * No body
-  * Sample response: { "Implements": ["VolumeDriver"] }
+  * Request body: No
+  * Response: { "Implements": ["VolumeDriver"] }
+
 * /VolumeDriver.Capabilities
+  * Request body: No
+  * Response: { "Capabilities": { "Scope": "global" } }
+  
 * /VolumeDriver.Create -d '{"Name":"vol-100"}'
 * /VolumeDriver.Mount -d '{"Name":"vol-100", "ID": "id-123"}'
 * /VolumeDriver.Unmount -d '{"Name":"vol-100", "ID": "id-123"}'
