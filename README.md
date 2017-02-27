@@ -1,6 +1,6 @@
 Java based implementation of Docker Volume Plugin/Driver
 ==============================================================
-Implements creation of local volumes.
+Implements sample of local volume driver based on legacy and based plugin architecture.
 
 
 Technology Stack
