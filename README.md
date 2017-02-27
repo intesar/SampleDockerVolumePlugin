@@ -1,23 +1,18 @@
 
-Free SaaS Product
-==============================================================
-https://dchq.io 
-
-Learn more about HyperGrid
-==============================================================
-http://hypergrid.com/ 
-
-Java based implementation of Docker Volume Plugin/Driver
-==============================================================
-Implements sample of local volume driver based on legacy and based plugin architecture.
+# Java based implementation of Docker Volume Plugin/Driver
+Implements sample local volume driver based on docker plugin architecture.
 
 
-Technology Stack
+## Technology Stack
 ==================================================
 * Docker version v1.13+ (and v1.12+ legacy driver)
 * Java 1.8+
 * OS: Linux
 * Gradle 2.4+
+
+### Free SaaS Product [DCHQ.io] (https://dchq.io)
+
+### Learn more about HyperGrid [HyperGrid] (http://hypergrid.com/)
 
 1/4. Docker Plugin Spec
 ==================================================
@@ -81,7 +76,7 @@ Technology Stack
   * docker stop 
     * /VolumeDriver.Unmount    
     
-Endpoint Implementation (Legacy)
+2/4 Endpoint Implementation (Legacy)
 ==================================================
 https://github.com/intesar/SampleDockerVolumePlugin/blob/master/src/main/java/com/dchq/docker/volume/driver/controller/DockerVolumeDriverController.java
 
