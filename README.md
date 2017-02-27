@@ -15,8 +15,9 @@ Docke Plugin Spec
 * https://docs.docker.com/engine/extend/plugin_api/
 
 * /Plugin.Activate
+  * No body
+  * Sample response: { "Implements": ["VolumeDriver"] }
 * /VolumeDriver.Capabilities
-
 * /VolumeDriver.Create -d '{"Name":"vol-100"}'
 * /VolumeDriver.Mount -d '{"Name":"vol-100", "ID": "id-123"}'
 * /VolumeDriver.Unmount -d '{"Name":"vol-100", "ID": "id-123"}'
