@@ -57,7 +57,21 @@ Docke Plugin Spec
   * Request body: { "Name": "volume_name" }
   * Response: { "Err": "" }
 
-
+* How Docker Volume orchestration works.
+  * docker volume ls
+    * /VolumeDriver.List
+  * docker volume create 
+    * /VolumeDriver.Get (If volume found it simply return the volume. ** Ideally docker should throw error ** )
+    * /VolumeDriver.Create
+  * docker volume inspect
+    * /VolumeDriver.Get
+  * docker volume rm
+    * /VolumeDriver.Remove
+  * docker run/start
+    * /VolumeDriver.Mount    
+  * docker stop 
+    * /VolumeDriver.Unmount    
+    
 
 How to build this code.
 ==================================================
