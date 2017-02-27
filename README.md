@@ -1,15 +1,29 @@
-Java based implementation of Docker Volume Driver
-==================================================
-This implementation creates volumes in the temp directory of the host system.
+Java based implementation of Docker Volume Plugin/Driver
+==============================================================
+Implements creation of local volumes.
 
 
 Technology Stack
 ==================================================
-* Docker version v1.12+
+* Docker version v1.13+ (v1.12+ legacy driver)
 * Java 1.8+
-* OS: MacOS, Linux or Windows
-* IDE: IntelliJ or Eclipse or Netbeans
+* OS: Linux
 * Gradle 2.4+
+
+Docke Plugin Spec
+==================================================
+* https://docs.docker.com/engine/extend/plugin_api/
+
+* /Plugin.Activate
+* /VolumeDriver.Capabilities
+
+* /VolumeDriver.Create -d '{"Name":"vol-100"}'
+* /VolumeDriver.Mount -d '{"Name":"vol-100", "ID": "id-123"}'
+* /VolumeDriver.Unmount -d '{"Name":"vol-100", "ID": "id-123"}'
+* /VolumeDriver.Get -d '{"Name":"vol-100"}'
+* /VolumeDriver.List
+* /VolumeDriver.Path -d '{"Name":"vol-100"}'
+* /VolumeDriver.Remove -d '{"Name":"vol-100"}'
 
 
 How to build this code.
