@@ -24,13 +24,39 @@ Docke Plugin Spec
   * Request body: No
   * Response: { "Capabilities": { "Scope": "global" } }
   
-* /VolumeDriver.Create -d '{"Name":"vol-100"}'
-* /VolumeDriver.Mount -d '{"Name":"vol-100", "ID": "id-123"}'
-* /VolumeDriver.Unmount -d '{"Name":"vol-100", "ID": "id-123"}'
-* /VolumeDriver.Get -d '{"Name":"vol-100"}'
+* /VolumeDriver.Create
+  * Request body: { "Name": "volume_name", "Opts": {} } 
+  * Response: { "Err": "" }
+  * Notes: Should only create the volume. Nor should you attach to the host/vm nor you should mount at this point.
+  
+* /VolumeDriver.Mount
+  * Request body: { "Name": "volume_name", "ID": "b87d7442095999a92b65b3d9691e697b61713829cc0ffd1bb72e4ccd51aa4d6c" }
+  * Response: { "Err": "" }
+  * Notes: Attach and mount the volume and remember the containeri-id is using it. If more than one container mounts the volume then this endpoint is called that many times but you don't have to attach/mount more than one, but you still need to remember how many containers are using it.
+
+* /VolumeDriver.Unmount
+  * Request body: { "Name": "volume_name", "ID": "b87d7442095999a92b65b3d9691e697b61713829cc0ffd1bb72e4ccd51aa4d6c" }
+  * Response: { "Err": "" }
+  * Notes: You should detach/unmount only if no other containers are using it.
+
+
+* /VolumeDriver.Get
+  * Request body: { "Name": "volume_name"} 
+  * Response: { "Volume": { "Name": "volume_name", "Mountpoint": "/path/to/directory/on/host", "Status": {} }, "Err": "" }
+  * Notes: Mountpoing is optional. If the volume is only created then it doesn't have a mountpoint.
+
 * /VolumeDriver.List
-* /VolumeDriver.Path -d '{"Name":"vol-100"}'
-* /VolumeDriver.Remove -d '{"Name":"vol-100"}'
+  * Request body: No
+  * Response: { "Volumes": [ { "Name": "volume_name", "Mountpoint": "/path/to/directory/on/host" } ], "Err": "" }
+
+* /VolumeDriver.Path
+  * Request body: { "Name": "volume_name"} 
+  * Response: { "Mountpoint": "/path/to/directory/on/host", "Err": "" }
+
+* /VolumeDriver.Remove
+  * Request body: { "Name": "volume_name" }
+  * Response: { "Err": "" }
+
 
 
 How to build this code.
@@ -96,6 +122,6 @@ WantedBy=multi-user.target
 Sample Docker Volume commands for creating, deleting, listing, inspecting volumes
 ==================================================
 * docker volume create --driver dchqvol --name dchqvol116
-* docker volume inspect --driver dchqvol --name dchqvol116
+* docker volume inspect dchqvol116
 * docker volume ls | grep dchqvol
-* docker volume remove --driver dchqvol --name dchqvol116
+* docker volume remove dchqvol116
