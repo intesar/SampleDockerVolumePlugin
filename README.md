@@ -11,7 +11,6 @@ Implements sample local volume driver based on docker plugin architecture.
 
 
 ## Technology Stack
-==================================================
 * Docker version v1.13+ (and v1.12+ legacy driver)
 * Java 1.8+
 * OS: Linux
@@ -714,3 +713,11 @@ curl  -X POST --unix-socket /tmp/hypercloud.sock http://localhost/VolumeDriver.R
 * com.dchq.docker.volume.driver.controller.DockerVolumeDriverControllerIntegrationTests
 * API produces "application/vnd.docker.plugins.v1.2+json"
 
+
+## 5 Recommendations/Learnings.
+  * How unix-socket based approach is going to work on Windows?
+  * Any repository created using hub/UI is tagged as image repository and pushing a plugin to this repo won't work.
+  * TLS support for unix-sockets.
+  * Volume create for duplicate volume name doesn't fail.
+  * Docker expects plugin to remember how many containers are using volume. I'm not sure how this will work in cases of docker crashes/restarts.
+  * No better way of managing senstive information (credentails) in plugins.
