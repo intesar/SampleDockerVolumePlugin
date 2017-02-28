@@ -724,6 +724,6 @@ curl  -X POST --unix-socket /tmp/hypercloud.sock http://localhost/VolumeDriver.R
   * How unix-socket based approach is going to work on Windows?
   * Any repository created using hub/UI is tagged as image repository and pushing a plugin to this repo won't work.
   * TLS support for unix-sockets.
-  * Volume create for duplicate volume name doesn't fail.
+  * Volume create for duplicate volume name doesn't fail (bug) [https://github.com/docker/docker/issues/31407].
   * Docker expects plugin to remember how many containers are using volume. I'm not sure how this will work in cases of docker crashes/restarts.
   * No better way of managing senstive information (credentails) in plugins.
