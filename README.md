@@ -196,11 +196,56 @@ docker rmi rootfsimage
   "WorkDir": ""
 }
 ```
+  * Notes: 
+    - Our plugin needs 'CAP_SYS_ADMIN' privelege 
+    - PropagatedMount (/var/lib/hypercloud/volumes) is where our volumes are mounted
+    - We needed access to host/vm's /dev location as well
+    - Our sock file name is 'hypercloud.sock'. Make sure to create the sock file in '/run/docker/plugins/hypercloud.sock', Docker will detec from this location.
+    
+* Create plugin (point to the folder where config and rootfs is)
+```
+docker plugin create hypergrid/hypercloud:1.0 myplugin
+```
 
+* Once the plugin is created you can test or push it. Note, don't create the 'hypercloud' repository using hub (UI). When you push the plugin to non existing repo docker will create the repo and mark it as plugin repo. 
+```
+docker login (first time)
+docker plugin push hypergrid/hypercloud:1.0 
+```
 
 ## 4/4 How to install/debug the plugin
 
-* 
+* listing plugins
+```
+docker plugin ls
+```
+
+* install plugins
+```
+docker plugin install hypergrid/hypercloud:1.5
+```
+
+* inspect plugins
+```
+docker plugin inspect hypergrid/hypercloud:1.5
+```
+
+* enable plugins (runs)
+```
+docker plugin enable hypergrid/hypercloud:1.5
+```
+
+* disable plugins (stops)
+```
+docker plugin disable hypergrid/hypercloud:1.5
+```
+
+* remove plugins (stops)
+```
+docker plugin rm -f hypergrid/hypercloud:1.5
+```
+
+
 
 How to clone and write you're own driver implementation
 ==================================================
