@@ -655,7 +655,7 @@ docker-runc exec -t [plugin-id] sh
 ### Sample Docker Volume commands for creating, deleting, listing, inspecting volumes
 
 ```
-docker volume create --driver dchqvol --name dchqvol116
+docker volume create --driver hypergrid/hypercloud:1.5 --name dchqvol116
 ```
 ```
 docker volume inspect dchqvol116
