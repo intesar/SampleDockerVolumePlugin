@@ -126,6 +126,8 @@ import org.springframework.web.bind.annotation.*;
  * Volume Controller
  *
  * @author Intesar Mohammed
+ * @author Shoukath Ali
+ * @author Luqman Shareef
  */
 
 @RestController
@@ -284,9 +286,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * TODO: Implement Jnr-socket
+ * @author Intesar Mohammed
+ * @author Shoukath Ali
+ * @author Luqman Shareef
  */
-//@Component
 public class SocketController {
 
     final org.slf4j.Logger logger = LoggerFactory.getLogger(getClass());
