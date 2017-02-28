@@ -16,9 +16,11 @@ Implements sample local volume driver based on docker plugin architecture.
 * OS: Linux
 * Gradle 2.4+
 
-### Free SaaS Product [DCHQ.io] (https://dchq.io)
-
-### Learn more about HyperGrid [HyperGrid] (http://hypergrid.com/)
+### About us
+* Free SaaS Product [HyperCloud] (https://dchq.io)
+* Learn more about HyperGrid [HyperGrid] (http://hypergrid.com/)
+* [Request a demo] (http://pages.hypergrid.com/request_a_demo_hypergrid.html)
+* [Contact us] (http://hypergrid.com/about/contact/)
 
 
 
