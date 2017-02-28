@@ -1,5 +1,7 @@
 
-# Java based implementation of Docker Volume Plugin/Driver
+# How to build Docker Plugin/Driver/Extention (New Plugin Architecture).
+
+## Sample Docker Volume Plugin/Driver written in Java.
 Implements sample local volume driver based on docker plugin architecture.
 
 1.  [Tech Stack] (https://github.com/intesar/SampleDockerVolumePlugin/blob/master/README.md#technology-stack)
