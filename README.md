@@ -641,7 +641,7 @@ docker plugin enable hypergrid/hypercloud:1.5
 docker plugin disable hypergrid/hypercloud:1.5
 ```
 
-* remove plugins (stops)
+* remove plugins (removes)
 ```
 docker plugin rm -f hypergrid/hypercloud:1.5
 ```
@@ -657,16 +657,21 @@ docker-runc exec -t [plugin-id] sh
 ### Sample Docker Volume commands for creating, deleting, listing, inspecting volumes
 
 ```
-docker volume create --driver hypergrid/hypercloud:1.5 --name dchqvol116
+docker volume create --driver hypergrid/hypercloud:1.5 --name vol-100
 ```
 ```
-docker volume inspect dchqvol116
+docker volume inspect vol-100
 ```
 ```
-docker volume ls | grep dchqvol
+docker volume ls | grep vol-100
 ```
+
 ```
-docker volume remove dchqvol116
+docker run -d -v vol-100:/opt/ nginx:latest
+```
+
+```
+docker volume remove vol-100
 ```
 
 ```
@@ -720,10 +725,10 @@ curl  -X POST --unix-socket /tmp/hypercloud.sock http://localhost/VolumeDriver.R
 * API produces "application/vnd.docker.plugins.v1.2+json"
 
 
-## 5 Recommendations/Learnings.
+## Improvement Suggestions.
   * How unix-socket based approach is going to work on Windows?
   * Any repository created using hub/UI is tagged as image repository and pushing a plugin to this repo won't work.
   * TLS support for unix-sockets.
-  * Volume create for duplicate volume name doesn't fail (bug) [https://github.com/docker/docker/issues/31407].
-  * Docker expects plugin to remember how many containers are using volume. I'm not sure how this will work in cases of docker crashes/restarts.
-  * No better way of managing senstive information (credentails) in plugins.
+  * Volume create for duplicate volume name doesn't fail [bug] (https://github.com/docker/docker/issues/31407).
+  * Docker expects plugin to remember how many containers are using volume. It's better docker sends some sort of flag for this.
+  * No better way of managing senstive information (credentails) in plugins. You might argue that you can pass sensitve infor as opts, this doesn't work because docker inspect will keep showing this info to the consumer.
