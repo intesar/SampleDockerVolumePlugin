@@ -39,12 +39,12 @@ Implements sample local volume driver based on docker plugin architecture.
 * /VolumeDriver.Create
   * Request body: { "Name": "volume_name", "Opts": {} } 
   * Response: { "Err": "" }
-  * Notes: Should only create the volume. Nor should you attach to the host/vm nor you should mount at this point.
+  * Notes: Should only create the volume. At this point volume shoudn't be attached/mounted to host/VM.
   
 * /VolumeDriver.Mount
   * Request body: { "Name": "volume_name", "ID": "b87d7442095999a92b65b3d9691e697b61713829cc0ffd1bb72e4ccd51aa4d6c" }
   * Response: { "Err": "" }
-  * Notes: Attach and mount the volume and remember the containeri-id is using it. If more than one container mounts the volume then this endpoint is called that many times but you don't have to attach/mount more than one, but you still need to remember how many containers are using it.
+  * Notes: Attach and mount the volume and remember the containeri-id which is using it. If more than one container mounts the volume then this endpoint is called that many times but you don't have to attach/mount more than one, but you still need to remember how many containers are using it.
 
 * /VolumeDriver.Unmount
   * Request body: { "Name": "volume_name", "ID": "b87d7442095999a92b65b3d9691e697b61713829cc0ffd1bb72e4ccd51aa4d6c" }
@@ -60,10 +60,12 @@ Implements sample local volume driver based on docker plugin architecture.
 * /VolumeDriver.List
   * Request body: No
   * Response: { "Volumes": [ { "Name": "volume_name", "Mountpoint": "/path/to/directory/on/host" } ], "Err": "" }
+  * Notes: Mountpoing is optional.
 
 * /VolumeDriver.Path
   * Request body: { "Name": "volume_name"} 
   * Response: { "Mountpoint": "/path/to/directory/on/host", "Err": "" }
+  * Notes: Mountpoing is optional.
 
 * /VolumeDriver.Remove
   * Request body: { "Name": "volume_name" }
@@ -86,7 +88,7 @@ Implements sample local volume driver based on docker plugin architecture.
     
 ## 2/4 Endpoint Implementation 
   * (Legacy) [Java Controller code] (https://github.com/intesar/SampleDockerVolumePlugin/blob/master/src/main/java/com/dchq/docker/volume/driver/controller/DockerVolumeDriverController.java)
-  * Sample code
+  * Sample java code implements all required endpoints.
   ```
   /**
  * COPYRIGHT (C) 2016 HyperGrid. All Rights Reserved.
@@ -252,7 +254,7 @@ public class DockerVolumeDriverController {
   * Here is our Sample Unix-Socket based implementation
     * [Github repository] (https://github.com/intesar/SampleDockerVolumePluginUnixSocket)
     * [Code] ( https://github.com/intesar/SampleDockerVolumePluginUnixSocket/blob/master/src/main/java/com/dchq/docker/volume/driver/controller/SocketController.java)
-  * Code Sample
+  * Sample code implements unix-socket. Note only this approach works with latest spec.
   ```
   package com.dchq.docker.volume.driver.controller;
 
@@ -485,7 +487,7 @@ public class SocketController {
 
 ## 3/4 How to build the plugin
 * (Reference Doc) [https://github.com/docker/docker/blob/master/docs/extend/index.md]
-* You need to wrap your plugin code in a container. So you need Dockerfile, here is one sample.
+* You need to wrap your plugin code in a container. So you need Dockerfile, here is one sample file.
 ```
 FROM java:8
 RUN mkdir -p /opt/dchq
