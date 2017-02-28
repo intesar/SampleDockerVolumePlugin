@@ -19,9 +19,8 @@ Implements sample local volume driver based on docker plugin architecture.
 ### About us
 * Free SaaS Product [HyperCloud] (https://dchq.io)
 * Learn more about HyperGrid [HyperGrid] (http://hypergrid.com/)
-* [Request a demo] (http://pages.hypergrid.com/request_a_demo_hypergrid.html)
-* [Contact us] (http://hypergrid.com/about/contact/)
-
+* Request a demo [here] (http://pages.hypergrid.com/request_a_demo_hypergrid.html)
+* Contact us [here] (http://hypergrid.com/about/contact/)
 
 
 ## 1/4. Understanding Docker Plugin Spec
@@ -30,46 +29,47 @@ Implements sample local volume driver based on docker plugin architecture.
   * https://docs.docker.com/engine/extend/plugin_api/
   * https://docs.docker.com/engine/extend/plugins_volume/
 
-* /Plugin.Activate
+### Requires implementing the following endpoints.
+1 /Plugin.Activate
   * Request body: No
   * Response: { "Implements": ["VolumeDriver"] }
 
-* /VolumeDriver.Capabilities
+2 /VolumeDriver.Capabilities
   * Request body: No
   * Response: { "Capabilities": { "Scope": "global" } }
   
-* /VolumeDriver.Create
+3 /VolumeDriver.Create
   * Request body: { "Name": "volume_name", "Opts": {} } 
   * Response: { "Err": "" }
   * Notes: Should only create the volume. At this point volume shoudn't be attached/mounted to host/VM.
   
-* /VolumeDriver.Mount
+4 /VolumeDriver.Mount
   * Request body: { "Name": "volume_name", "ID": "b87d7442095999a92b65b3d9691e697b61713829cc0ffd1bb72e4ccd51aa4d6c" }
   * Response: { "Err": "" }
   * Notes: Attach and mount the volume and remember the containeri-id which is using it. If more than one container mounts the volume then this endpoint is called that many times but you don't have to attach/mount more than one, but you still need to remember how many containers are using it.
 
-* /VolumeDriver.Unmount
+5 /VolumeDriver.Unmount
   * Request body: { "Name": "volume_name", "ID": "b87d7442095999a92b65b3d9691e697b61713829cc0ffd1bb72e4ccd51aa4d6c" }
   * Response: { "Err": "" }
   * Notes: You should detach/unmount only if no other containers are using it.
 
 
-* /VolumeDriver.Get
+6 /VolumeDriver.Get
   * Request body: { "Name": "volume_name"} 
   * Response: { "Volume": { "Name": "volume_name", "Mountpoint": "/path/to/directory/on/host", "Status": {} }, "Err": "" }
   * Notes: Mountpoing is optional. If the volume is only created then it doesn't have a mountpoint.
 
-* /VolumeDriver.List
+7 /VolumeDriver.List
   * Request body: No
   * Response: { "Volumes": [ { "Name": "volume_name", "Mountpoint": "/path/to/directory/on/host" } ], "Err": "" }
   * Notes: Mountpoing is optional.
 
-* /VolumeDriver.Path
+8 /VolumeDriver.Path
   * Request body: { "Name": "volume_name"} 
   * Response: { "Mountpoint": "/path/to/directory/on/host", "Err": "" }
   * Notes: Mountpoing is optional.
 
-* /VolumeDriver.Remove
+9 /VolumeDriver.Remove
   * Request body: { "Name": "volume_name" }
   * Response: { "Err": "" }
 
