@@ -17,6 +17,7 @@ Implements sample local volume driver based on docker plugin architecture.
 * Java 1.8+
 * OS: Linux
 * Gradle 2.4+
+* We just took our existing driver and added docker plugin adaptor and we're good to go.
 
 ### About us
 * Free SaaS Product [HyperCloud] (https://dchq.io)
