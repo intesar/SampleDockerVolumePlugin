@@ -1,5 +1,5 @@
 
-# How to build Docker Plugin/Driver/Extention (New Plugin Architecture).
+# How to build a Docker Plugin (New Plugin Architecture).
 
 ## Sample Docker Volume Plugin/Driver written in Java.
 Implements sample local volume driver based on docker plugin architecture.
@@ -24,6 +24,12 @@ Implements sample local volume driver based on docker plugin architecture.
 * Request a demo [here] (http://pages.hypergrid.com/request_a_demo_hypergrid.html)
 * Contact us [here] (http://hypergrid.com/about/contact/)
 
+### Whats new in the New Plugin Spec?
+* Old spec standardized the API interface (9 endpoints see below).
+* New spec extends the standardization to.
+  * Plugin packaging (build as an image)
+  * Plugin storage (hub/store)
+  * Plugin management (install, configure, & delete) 
 
 ## 1/4. Understanding Docker Plugin Spec
 
