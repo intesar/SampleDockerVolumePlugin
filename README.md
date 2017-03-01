@@ -735,4 +735,4 @@ curl  -X POST --unix-socket /tmp/hypercloud.sock http://localhost/VolumeDriver.R
   * Docker expects plugin to remember how many containers are using volume. It's better docker sends some sort of flag for this.
   * No better way of managing senstive information (credentails) in plugins. You might argue that you can pass sensitve infor as opts, this doesn't work because docker inspect will keep showing this info to the consumer.
   * docker volume inspect doesn't show connected containers [bug] (https://github.com/docker/docker/issues/31436).
-  * docker volume rm deletes a volume which in use by a container [bug] (https://github.com/docker/docker/issues/31436).
+  * docker volume rm -f deletes a volume even if its in use by a container [bug] (https://github.com/docker/docker/issues/31436).
